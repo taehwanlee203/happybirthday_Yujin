@@ -1,6 +1,6 @@
 window.addEventListener("wheel", function(e){
     e.preventDefault();
-},{passive : false});
+},{passive : true});
 
 var mHtml = $("html");
 var page = 1;
