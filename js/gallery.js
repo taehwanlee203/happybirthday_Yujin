@@ -2,9 +2,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const fileUpload = document.getElementById('file-upload');
     const takePhotoBtn = document.getElementById('take-photo-btn');
     const photoGallery = document.getElementById('photo-gallery');
-    const camera = document.getElementById('camera');
-    const photoCanvas = document.getElementById('photo-canvas');
-    const context = photoCanvas.getContext('2d');
 
     // Handle file upload
     fileUpload.addEventListener('change', function(event) {
@@ -17,28 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
             reader.readAsDataURL(file);
         }
     });
-
-    // Handle take photo
-    takePhotoBtn.addEventListener('click', function() {
-        if (camera.style.display === 'none') {
-            startCamera();
-        } else {
-            takePhoto();
-        }
-    });
-
-    // Start camera
-    function startCamera() {
-        camera.style.display = 'block';
-        takePhotoBtn.textContent = 'Capture Photo';
-        navigator.mediaDevices.getUserMedia({ video: true })
-            .then(stream => {
-                camera.srcObject = stream;
-            })
-            .catch(err => {
-                console.error("Error accessing camera: ", err);
-            });
-    }
 
     // Add photo to gallery
     function addPhotoToGallery(src, description) {
