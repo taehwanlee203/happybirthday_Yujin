@@ -32,12 +32,12 @@ body {
 }
 .scroll_on {
     padding: 55px 0;
-    font-size: 2.5em;
+    font-size: 2em;
     font-weight: 300;
     text-align: center;
     opacity: 0;
     transition: all 1s;
-    margin: 40px;
+    margin: 30px;
 }
 .scroll_on.active {
     opacity: 1 !important;
