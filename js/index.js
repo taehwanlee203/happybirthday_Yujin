@@ -1,27 +1,20 @@
-window.addEventListener("wheel", function(e){
-    e.preventDefault();
-},{passive : true});
+document.addEventListener('DOMContentLoaded', function() {
+    var mHtml = $("html");
+    var page = 1;
 
-var mHtml = $("html");
-var page = 1;
+    $(window).on("wheel", function(e) {
+        if(mHtml.is(":animated")) return;
+        if(e.originalEvent.deltaY > 0) {
+            if(page == 4) return;
+            page++;
+        } else if(e.originalEvent.deltaY < 0) {
+            if(page == 1) return;
+            page--;
+        }
+        var posTop = (page-1) * $(window).height();
+        mHtml.animate({scrollTop : posTop});
+    });
 
-mHtml.animate({scrollTop : 0}, 10);
-
-$(window).on("wheel", function(e) {
-    if(mHtml.is(":animated")) return;
-    if(e.originalEvent.deltaY > 0) {
-        if(page == 4) return;
-        page++;
-    } else if(e.originalEvent.deltaY < 0) {
-        if(page == 1) return;
-        page--;
-    }
-    var posTop = (page-1) * $(window).height();
-    mHtml.animate({scrollTop : posTop});
-});
-
-// 
-$(document).ready(function() {
     $(".gnb li a").on('click', function(event) {
         if (this.hash !== "") {
             event.preventDefault();

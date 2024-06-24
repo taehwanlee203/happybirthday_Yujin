@@ -5,8 +5,7 @@
 
 
 body {
-    overflow: hidden;
-    
+    overflow: auto;
 }
 
 
@@ -232,6 +231,9 @@ h1.logo {
 
 /* 태블릿용 CSS */
 @media all and (min-width: 768px) {
+    body {
+        overflow: hidden;
+    }
 
     .scroll_on {
         padding: 65px 0;
@@ -248,6 +250,10 @@ h1.logo {
 
 /* PC용 CSS */
 @media all and (min-width:1024px) {
+    body {
+        overflow: hidden;
+    }
+
     .scroll_on {
         padding: 50px 0;
         font-size: 3.5em;
