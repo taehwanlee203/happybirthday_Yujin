@@ -40,24 +40,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
-    // Take photo
-    function takePhoto() {
-        context.drawImage(camera, 0, 0, photoCanvas.width, photoCanvas.height);
-        const photoData = photoCanvas.toDataURL('image/png');
-        addPhotoToGallery(photoData, 'Taken Photo');
-        stopCamera();
-    }
-
-    // Stop camera
-    function stopCamera() {
-        camera.style.display = 'none';
-        takePhotoBtn.textContent = 'Take Photo';
-        const stream = camera.srcObject;
-        const tracks = stream.getTracks();
-        tracks.forEach(track => track.stop());
-        camera.srcObject = null;
-    }
-
     // Add photo to gallery
     function addPhotoToGallery(src, description) {
         const photoDiv = document.createElement('div');

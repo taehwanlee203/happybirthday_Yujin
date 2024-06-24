@@ -39,7 +39,9 @@ h1 {
     margin-bottom: 20px;
 }
 
-.upload-buttons {
+.upload-buttons input {
+    display: block;
+    margin: 0 auto;
     text-align: center;
     margin-bottom: 20px;
 }
@@ -91,9 +93,4 @@ h1 {
 .photo:hover .description {
     opacity: 1;
     cursor: pointer;
-}
- 
-#photo-canvas, #camera {
-    justify-content: center;
-    align-items: center;
 }
