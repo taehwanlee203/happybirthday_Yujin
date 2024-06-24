@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>유진이의 생일</title>
+    <link rel="shortcut icon" href="images/logo.jpg">
+    <link rel="stylesheet" href="css/music.css">
+    <link rel="stylesheet" href="css/gift.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+    </nav>
+    <div class="section" id="congratulations-section">
+        <h2>생일축하해 유지나 💜💜</h2>
+        <button id="play-song-btn">노래 듣기</button>
+        <h2>조이 (JOY) - <br>Happy Birthday To You</h2>
+        <div id="lyrics" class="lyrics-container hidden">
+            <p id="prev-lyric" class="lyric-line"></p>
+            <p id="current-lyric" class="lyric-line current"></p>
+            <p id="next-lyric" class="lyric-line"></p>
+        </div>
+        <div id="balloons"></div>
+        <canvas id="fireworks"></canvas>
+        <audio id="birthday-song" src="images/song.mp3"></audio>
+    </div>
+</body>
+<script src="js/music.js"></script>
+</html>

@@ -1,0 +1,104 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #121212;
+    color: #e0e0e0;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    height: 100vh;
+}
+
+h2 {
+    font-weight: bold;
+    font-size: 1.7em;
+    font-family: 'LOTTERIACHAB';
+}
+
+.section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 60px; /* Adjust padding to match header height */
+    background-size: cover;
+    background-position: center;
+}
+
+/* song */
+#congratulations-section {
+    text-align: center;
+}
+
+#play-song-btn {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    background-color: #bb86fc;
+    color: #121212;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.lyrics-container {
+    font-size: 1.5em;
+    margin-top: 20px;
+    height: 150px; /* Adjust as needed */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.lyric-line {
+    opacity: 0.5;
+}
+
+.lyric-line.current {
+    font-size: 1.5em;
+    font-weight: bold;
+    opacity: 1;
+}
+
+#balloons {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.ballon {
+    position: absolute;
+    bottom: -100px;
+    width: 50px;
+    height: 70px;
+    background-color: #ff6f61;
+    border-radius: 50%;
+    animation: rise 10s infinite ease-in-out;
+}
+
+.ballon:before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    width: 2px;
+    height: 10px;
+    background-color: #ff6f61;
+}
+
+@keyframes rise {
+    0% { bottom: -100px; }
+    100% { bottom: 100vh; }
+}
+
+canvas#fireworks {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}

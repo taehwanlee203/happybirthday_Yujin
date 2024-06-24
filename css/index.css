@@ -1,0 +1,267 @@
+@charset "utf-8";
+
+/* 모바일용 CSS */
+/* 기본 CSS */
+
+
+body {
+    overflow: hidden;
+    
+}
+
+
+/* scroll event section */
+.section {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* section1 */
+#section1 {
+    background: url("../images/logo.jpg") no-repeat center;
+}
+
+/* section2 */
+/* #section2 {
+    
+} */
+
+.scroll_wrap {
+    overflow: hidden;
+    font-family: 'BagelFatOne-Regular';
+    color: #FF5675;
+}
+.scroll_on {
+    padding: 55px 0;
+    font-size: 2.5em;
+    font-weight: 300;
+    text-align: center;
+    opacity: 0;
+    transition: all 1s;
+    margin: 40px;
+}
+.scroll_on.active {
+    opacity: 1 !important;
+    transform: translate(0, 0) !important;
+    
+}
+
+/* 1년에 한번 뿐인 오늘 */
+.scroll_on.type_top {
+    transform: translate(0, -50px);
+}
+
+/* .scroll_on.type_bottom {
+    transform: translate(0, 50px);
+} */
+
+/* 태어나줘서 고마워, 공주 */
+.scroll_on.type_left {
+    transform: translate(-50px, 0);
+}
+
+/* .scroll_on.type_right {
+    transform: translate(50px, 0);
+} */
+
+/* section3 */
+#section3 {
+    background: url("../images/section3.jpg") no-repeat right;
+}
+
+/* section4 */
+/* #section4 {
+    
+} */
+
+/* 풍선 올라가는 애니메이션 */
+.balloon-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.balloon-container img {
+    width: 250px;
+    height: 200px;
+}
+
+.balloon {
+    width: 50px;
+    height: 70px;
+    border-radius: 50%;
+    font-family: 'BagelFatOne-Regular';
+    position: absolute;
+    bottom: -150px; /* 시작 위치를 화면 아래로 설정 */
+    animation: float 5s infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 스페셜 풍선1 */
+.balloon1 {
+    left: 74%;
+    background-image: url('images/balloon.png');
+    animation-delay: 13.5s; /* 다른 풍선과 애니메이션을 비동기화 */
+}
+
+/* 스페셜 풍선2 */
+.balloon2 {
+    left: 29%;
+    background-image: url('../images/balloon.png');
+    animation-delay: 21s; /* 다른 풍선과 애니메이션을 비동기화 */
+}
+
+/* 멘트 풍선 */
+.balloon3 {
+    width: 200px;
+    font-size: 1.5em;
+    color: #148CFF;
+    left: 10%;
+    animation-delay: 4.5s; /* 다른 풍선과 애니메이션을 비동기화 */
+}
+
+.balloon4 {
+    width: 230px;
+    font-size: 2em;
+    color: #FF5675;
+    left: 35%;
+    animation-delay: 2.5s; /* 다른 풍선과 애니메이션을 비동기화 */
+}
+
+/* 기본 풍선 */
+.balloon5 {
+    font-size: 8em;
+    left: 22%;
+    animation-delay: 3s; /* 다른 풍선과 애니메이션을 비동기화 */
+}
+
+.balloon6 {
+    font-size: 8em;
+    left: 76%;
+    animation-delay: 2s; /* 다른 풍선과 애니메이션을 비동기화 */
+}
+
+.balloon7 {
+    font-size: 9em;
+    left: 57%;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh); /* 화면 위로 올라가도록 설정 */
+        opacity: 0;
+    }
+}
+
+/* menu header */
+.header {
+    position: fixed;
+    top: 50px;
+    width: 100%;
+    background-color: #1e1e1e;
+    opacity: 70%;
+    padding: 35px 0;
+    text-align: center;
+    justify-content: center;
+    font-family: 'WAGURI';
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+h1.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0; /* 기본 여백을 제거합니다 */
+}
+
+.logo a {
+    color: #bb86fc;
+    text-decoration: none;
+    font-size: 1.5em;
+    display: block; /* 블록 요소로 설정하여 중앙 정렬이 적용되도록 합니다 */
+    text-align: center; /* 텍스트를 중앙으로 정렬합니다 */
+}
+
+.nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gnb {
+    list-style: none;
+    padding: 0;
+    margin-top: 30px;
+    display: flex;
+    gap: 25px;
+}
+
+.gnb li {
+    display: inline;
+}
+
+.gnb li a {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+.gnb li a:hover {
+    color: #bb86fc;
+}
+
+.menu_toggle_btn {
+    display: none;
+    font-size: 1.5em;
+    color: #e0e0e0;
+    cursor: pointer;
+}
+
+
+/* 태블릿용 CSS */
+@media all and (min-width: 768px) {
+
+    .scroll_on {
+        padding: 65px 0;
+        font-size: 3.5em;
+        margin: 50px;
+    }
+    
+    .gnb li a {
+        font-size: 1.5em;
+    }
+
+    
+}
+
+/* PC용 CSS */
+@media all and (min-width:1024px) {
+    .scroll_on {
+        padding: 50px 0;
+        font-size: 3.5em;
+        margin: 50px;
+    }
+
+    #section3 {
+        background: url("../images/section3.jpg") no-repeat center;
+    }
+
+    .gnb li a {
+        font-size: 2em;
+    }
+    
+}

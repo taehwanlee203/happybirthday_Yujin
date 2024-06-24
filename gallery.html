@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>유진이의 생일</title>
+    <link rel="shortcut icon" href="images/logo.jpg">
+    <link rel="stylesheet" href="css/gallery.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+    </nav>
+    <div class="container">
+        <h1></h1>
+        <div class="upload-buttons">
+            <input type="file" id="file-upload" accept="image/*">
+            <button id="take-photo-btn">Take Photo</button>
+        </div>
+        <div class="photos" id="photo-gallery">
+            <div class="photo" data-description="Memory 1">
+                <img src="images/section3.jpg" alt="Memory 1">
+                <div class="description">Memory 1</div>
+            </div>
+            <div class="photo" data-description="Memory 2">
+                <img src="images/section3.jpg" alt="Memory 2">
+                <div class="description">Memory 2</div>
+            </div>
+            <div class="photo" data-description="Memory 3">
+                <img src="images/section3.jpg" alt="Memory 3">
+                <div class="description">Memory 3</div>
+            </div>
+        </div>
+        <video id="camera" width="640" height="480" autoplay style="display: none;"></video>
+        <canvas id="photo-canvas" width="640" height="480" style="display: none;"></canvas>
+    </div>
+    <script src="js/gallery.js"></script>
+</body>
+</html>

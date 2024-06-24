@@ -1,0 +1,127 @@
+/* body */
+body {
+    font-family: Arial, sans-serif;
+    color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    margin: 0;
+    overflow: auto;
+    background-image: linear-gradient(to right, #E55D87, #5FC3E4);
+}
+
+
+
+/* menu */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #fff;
+    opacity: 80%;
+    padding: 20px;
+    text-align: center;
+}
+
+nav a {
+    color: #e0e0e0;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 1.2em;
+}
+
+nav a:hover {
+    color: lightcoral;
+}
+
+/* content container */
+.container {
+    text-align: center; 
+    padding: 40px;
+    border-radius: 10px;
+    max-width: 900px;
+    margin-top: 50px;
+}
+
+/* gift icon */
+.gift-game {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+}
+
+.gift-box {
+    width: 150px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.gift-box:hover {
+    transform: scale(1.1);
+}
+
+#gift-message {
+    margin-top: 50px;
+}
+
+#gift-message img {
+    max-width: 200px;
+    display: block;
+    margin: 10px auto;
+}
+
+p#gift-text {
+    margin-top: 30px;
+    font-size: 20px;
+    font-family: bold;
+}
+
+/* 다시뽑기 */
+button#reset-btn {
+    background-color: #fff;
+    box-shadow: 0px 2px 2px #4e4d4d; 
+    color: black;
+    border: none;
+    padding: 20px 50px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    margin-top: 50px;
+}
+
+button#reset-btn:hover {
+    color: #5FC3E4;
+}
+
+.hidden {
+    display: none;
+}
+
+@media (max-width:768px) {
+    .container {
+        padding: 40px;
+    }
+
+    .gift-game {
+        gap: 80px;
+    }    
+
+    
+}
+
+@media (max-width:430px) {
+    .container {
+        padding: 20px;
+    }
+
+    .gift-game {
+        gap: 50px;
+    }    
+
+    .gift-game img {
+        width: 80px;
+    }
+    
+}
