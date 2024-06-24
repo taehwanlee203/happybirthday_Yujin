@@ -1,27 +1,33 @@
-window.addEventListener("wheel", function(e){
-    e.preventDefault();
-},{passive : false});
-
-var mHtml = $("html");
-var page = 1;
-
-mHtml.animate({scrollTop : 0}, 10);
-
-$(window).on("wheel", function(e) {
-    if(mHtml.is(":animated")) return;
-    if(e.originalEvent.deltaY > 0) {
-        if(page == 4) return;
-        page++;
-    } else if(e.originalEvent.deltaY < 0) {
-        if(page == 1) return;
-        page--;
-    }
-    var posTop = (page-1) * $(window).height();
-    mHtml.animate({scrollTop : posTop});
-});
-
-// 
+//main screen scroll
 $(document).ready(function() {
+    var mHtml = $("html, body");
+    var page = 1;
+
+    // 페이지 초기화 시 맨 위로 스크롤
+    mHtml.animate({scrollTop: 0}, 10);
+
+    // 터치 이벤트로 페이지 넘김
+    $(document).on('touchmove', function(e) {
+        e.preventDefault();
+        if(mHtml.is(":animated")) return;
+        var delta = e.originalEvent.touches[0].clientY - startY;
+
+        if (delta > 50) { // 스크롤을 아래로 움직이면 다음 페이지로
+            if (page < 4) {
+                page++;
+                var posTop = (page - 1) * $(window).height();
+                mHtml.animate({scrollTop: posTop}, 800);
+            }
+        } else if (delta < -50) { // 스크롤을 위로 움직이면 이전 페이지로
+            if (page > 1) {
+                page--;
+                var posTop = (page - 1) * $(window).height();
+                mHtml.animate({scrollTop: posTop}, 800);
+            }
+        }
+    });
+
+    // 네비게이션 링크 클릭 시 부드러운 스크롤
     $(".gnb li a").on('click', function(event) {
         if (this.hash !== "") {
             event.preventDefault();
@@ -37,7 +43,6 @@ $(document).ready(function() {
         }
     });
 });
-
 
 // section2 글씨 scroll
 $(document).ready(function() {
