@@ -1,33 +1,38 @@
-document.addEventListener('DOMContentLoaded', function() {
-    var mHtml = $("html");
-    var page = 1;
+$(document).ready(function() {
+    var sections = $('.section'); // 모든 섹션 요소를 가져옵니다.
+    var page = 0; // 페이지 번호, 0부터 시작합니다.
 
-    $(window).on("wheel", function(e) {
-        if(mHtml.is(":animated")) return;
-        if(e.originalEvent.deltaY > 0) {
-            if(page == 4) return;
-            page++;
-        } else if(e.originalEvent.deltaY < 0) {
-            if(page == 1) return;
-            page--;
+    // 스크롤 이벤트 핸들러
+    $(window).on('wheel', function(e) {
+        // 스크롤 이벤트를 처리 중이면 함수 종료
+        if ($('html, body').is(':animated')) return;
+
+        // 마우스 휠의 방향에 따라 페이지 번호 증가 또는 감소
+        if (e.originalEvent.deltaY > 0) {
+            page++; // 다음 페이지로 이동
+        } else {
+            page--; // 이전 페이지로 이동
         }
-        var posTop = (page-1) * $(window).height();
-        mHtml.animate({scrollTop : posTop});
+
+        // 페이지 번호를 0부터 sections의 길이 - 1 사이 값으로 제한합니다.
+        page = Math.max(0, Math.min(page, sections.length - 1));
+
+        // 해당 페이지의 섹션으로 스크롤합니다.
+        $('html, body').animate({
+            scrollTop: sections.eq(page).offset().top
+        }, 800);
     });
 
-    $(".gnb li a").on('click', function(event) {
-        if (this.hash !== "") {
-            event.preventDefault();
-            var hash = this.hash;
-            var target = $(hash);
-            if(target.length) {
-                $('html, body').animate({
-                    scrollTop: target.offset().top
-                }, 800, function(){
-                    window.location.hash = hash;
-                });
-            }
-        }
+    // 네비게이션 링크 클릭 시 부드러운 스크롤 처리
+    $('.gnb li a').on('click', function(event) {
+        event.preventDefault(); // 기본 링크 이벤트 제거
+        var targetId = $(this).attr('href'); // 클릭된 링크의 href 속성 값 가져오기
+        var targetSection = $(targetId); // 해당 섹션 요소 가져오기
+
+        // 해당 섹션으로 부드럽게 스크롤 이동
+        $('html, body').animate({
+            scrollTop: targetSection.offset().top
+        }, 800);
     });
 });
 
@@ -78,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const diffSec = Math.floor(diff / 1000 % 60);
 
         if (remainTime) {
-            remainTime.textContent = `${diffHour}시간 ${diffMin}분 ${diffSec}초`;
+            remainTime.textContent = `${diffDay}일 ${diffHour}시간 ${diffMin}분 ${diffSec}초`;
         }
     }
 
