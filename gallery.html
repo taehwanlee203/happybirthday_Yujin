@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="shortcut icon" href="images/logo.jpg">
     <link rel="stylesheet" href="css/gallery.css">
 </head>
+
 <body>
     <nav>
         <a href="index2.html">Home</a>
@@ -30,38 +32,25 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>편지 작성</h2>
-            <input id="letter-name" type="text" placeholder="이름" size="10"/>
+            <input id="letter-name" type="text" placeholder="이름" size="10" />
             <textarea id="letter-content" placeholder="편지 내용을 입력하세요"></textarea>
             <button id="save-letter-btn">저장</button>
         </div>
     </div>
     <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
-      
-        // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
         const firebaseConfig = {
-          apiKey: "AIzaSyDiAVJSPBR6UP0dAk2J-vzcUbK7AsUCCjY",
-          authDomain: "happybirthdayyujin-1d294.firebaseapp.com",
-          databaseURL: "https://happybirthdayyujin-1d294-default-rtdb.asia-southeast1.firebasedatabase.app",
-          projectId: "happybirthdayyujin-1d294",
-          storageBucket: "happybirthdayyujin-1d294.appspot.com",
-          messagingSenderId: "523010029657",
-          appId: "1:523010029657:web:0c7a29fdb1cc7383b5d948",
-          measurementId: "G-XVPGR3WKT2"
+            apiKey: "AIzaSyDiAVJSPBR6UP0dAk2J-vzcUbK7AsUCCjY",
+            authDomain: "happybirthdayyujin-1d294.firebaseapp.com",
+            projectId: "happybirthdayyujin-1d294",
+            storageBucket: "happybirthdayyujin-1d294.appspot.com",
+            messagingSenderId: "523010029657",
+            appId: "1:523010029657:web:0c7a29fdb1cc7383b5d948",
+            measurementId: "G-XVPGR3WKT2"
         };
-      
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-        
+
         async function loadPhotos() {
-            const querySnapshot = await getDocs(collection(db, 'photos'));
-            querySnapshot.forEach((doc) => {
+            const snapshot = await getDocs(collection(db, 'photos'));
+            snapshot.forEach(doc => {
                 const data = doc.data();
                 addPhotoToGallery(doc.id, data.src, data.description, data.letter);
             });
@@ -150,7 +139,8 @@
 
             await loadPhotos();
         });
-      </script>
+    </script>
     <script src="js/gallery.js"></script>
 </body>
+
 </html>
