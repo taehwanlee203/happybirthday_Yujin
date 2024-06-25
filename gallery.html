@@ -10,9 +10,6 @@
 </head>
 
 <body>
-    <nav>
-        <a href="index2.html">Home</a>
-    </nav>
     <div class="container">
         <h1>편지 갤러리</h1>
         <div class="upload-buttons">
@@ -38,20 +35,18 @@
         </div>
     </div>
     <script type="module">
-
-
+        // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getFirestore, collection, getDocs, addDoc, updateDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
         // Firebase configuration
         const firebaseConfig = {
-            apiKey: "AIzaSyDiAVJSPBR6UP0dAk2J-vzcUbK7AsUCCjY",
-            authDomain: "happybirthdayyujin-1d294.firebaseapp.com",
-            projectId: "happybirthdayyujin-1d294",
-            storageBucket: "happybirthdayyujin-1d294.appspot.com",
-            messagingSenderId: "523010029657",
-            appId: "1:523010029657:web:0c7a29fdb1cc7383b5d948",
-            measurementId: "G-XVPGR3WKT2"
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
         };
 
         // Initialize Firebase
@@ -151,7 +146,7 @@
             await loadPhotos();
         });
     </script>
-    <script src="js/gallery.js"></script>
+    <!-- <script src="js/gallery.js"></script> -->
 </body>
 
 </html>
