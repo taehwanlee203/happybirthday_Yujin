@@ -195,50 +195,52 @@ document.addEventListener('DOMContentLoaded', function () {
         // 필요한 만큼 이미지 경로를 추가하세요.
     ];
 
-//     function changeBackgroundImage() {
-//         const randomImage = images[Math.floor(Math.random() * images.length)];
-        
-//         const img = new Image();
-//         img.src = randomImage;
-//         img.onload = () => {
-//         document.body.style.backgroundImage = `url(${randomImage})`;
-//         document.body.style.opacity = '0.6'; // 약간 불투명하게 설정
-//         document.body.style.height = '100%'; // 약간 불투명하게 설정
-//     }
-// }
-//     // 처음 로드 시 배경 이미지를 변경합니다.
-//     changeBackgroundImage();
+    //     function changeBackgroundImage() {
+    //         const randomImage = images[Math.floor(Math.random() * images.length)];
 
-//     // 일정 시간마다 배경 이미지를 변경합니다.
-//     setInterval(changeBackgroundImage, 3000); // 3초마다 배경 이미지 변경
-let currentImageIndex = 0;
+    //         const img = new Image();
+    //         img.src = randomImage;
+    //         img.onload = () => {
+    //         document.body.style.backgroundImage = `url(${randomImage})`;
+    //         document.body.style.opacity = '0.6'; // 약간 불투명하게 설정
+    //         document.body.style.height = '100%'; // 약간 불투명하게 설정
+    //     }
+    // }
+    //     // 처음 로드 시 배경 이미지를 변경합니다.
+    //     changeBackgroundImage();
 
-function preloadImages(urls) {
-    urls.forEach(url => {
-        const img = new Image();
-        img.src = url;
-    });
-}
+    //     // 일정 시간마다 배경 이미지를 변경합니다.
+    //     setInterval(changeBackgroundImage, 3000); // 3초마다 배경 이미지 변경
+    let currentImageIndex = 0;
 
-function changeBackgroundImage() {
-    currentImageIndex = (currentImageIndex + 1) % images.length;
-    const nextImage = images[currentImageIndex];
-    
-    const img = new Image();
-    img.src = nextImage;
-    img.onload = () => {
-        document.body.style.backgroundImage = `url(${nextImage})`;
+    function preloadImages(urls) {
+        urls.forEach(url => {
+            const img = new Image();
+            img.src = url;
+        });
     }
-}
 
-// 처음 로드 시 모든 이미지를 미리 로드합니다.
-preloadImages(images);
+    function changeBackgroundImage() {
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        const nextImage = images[currentImageIndex];
 
-// 처음 로드 시 배경 이미지를 변경합니다.
-changeBackgroundImage();
+        const img = new Image();
+        img.src = nextImage;
+        img.onload = () => {
+            document.body.style.backgroundImage = `url(${nextImage})`;
+            document.body.style.opacity = '0.6'; // 약간 불투명하게 설정
+            document.body.style.height = '100%'; // 약간 불투명하게 설정
+        }
+    }
 
-// 일정 시간마다 배경 이미지를 변경합니다.
-setInterval(changeBackgroundImage, 5000); // 5초마다 배경 이미지 변경
+    // 처음 로드 시 모든 이미지를 미리 로드합니다.
+    preloadImages(images);
+
+    // 처음 로드 시 배경 이미지를 변경합니다.
+    changeBackgroundImage();
+
+    // 일정 시간마다 배경 이미지를 변경합니다.
+    setInterval(changeBackgroundImage, 5000); // 5초마다 배경 이미지 변경
 
 });
 
