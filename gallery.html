@@ -54,10 +54,9 @@
         };
 
         // Initialize Firebase
+        document.addEventListener('DOMContentLoaded', async function () {
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-
-        let currentPhotoId;
 
         // Load photos from Firestore
         async function loadPhotos() {
@@ -95,7 +94,7 @@
             });
         }
 
-        document.addEventListener('DOMContentLoaded', async function () {
+        
             const fileUpload = document.getElementById('file-upload');
             const letterModal = document.getElementById('letter-modal');
             const closeBtn = document.querySelector('.close');
