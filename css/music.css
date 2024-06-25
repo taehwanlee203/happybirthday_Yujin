@@ -15,9 +15,16 @@ body {
     padding: 0;
 }
 
+
+body.loading {
+    opacity: 0.5;
+}
+
+
+
 h2 {
     font-weight: bold;
-    font-size: 1.7em;
+    font-size: 1.8em;
     font-family: 'LOTTERIACHAB';
     color: #fff;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -58,7 +65,8 @@ h2 {
 
 .lyrics-container {
     font-size: 1.5em;
-    width: 320px;
+    max-width: 330px;
+    width: 100%;
     height: 280px; /* Adjust as needed */
     display: flex;
     flex-direction: column;
@@ -80,47 +88,4 @@ h2 {
     font-size: 1.5em;
     font-weight: bold;
     opacity: 1;
-}
-
-#balloons {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-}
-
-.ballon {
-    position: absolute;
-    bottom: -100px;
-    width: 50px;
-    height: 70px;
-    background-color: #ff6f61;
-    border-radius: 50%;
-    animation: rise 10s infinite ease-in-out;
-}
-
-.ballon:before {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    width: 2px;
-    height: 10px;
-    background-color: #ff6f61;
-}
-
-@keyframes rise {
-    0% { bottom: -100px; }
-    100% { bottom: 100vh; }
-}
-
-canvas#fireworks {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
 }
