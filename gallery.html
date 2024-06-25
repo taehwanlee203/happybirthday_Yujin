@@ -35,6 +35,7 @@
         </div>
     </div>
     <script type="module">
+        
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getFirestore, collection, getDocs, addDoc, updateDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
@@ -62,13 +63,38 @@
             });
         }
 
+        // Function to add photo to the gallery
+        function addPhotoToGallery(id, src, description, letter) {
+            const photoGallery = document.getElementById('photo-gallery');
+            const photoDiv = document.createElement('div');
+            photoDiv.className = 'photo';
+            photoDiv.setAttribute('data-id', id);
+            photoDiv.setAttribute('data-description', description);
+
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = description;
+
+            const descDiv = document.createElement('div');
+            descDiv.className = 'description';
+            descDiv.textContent = description;
+
+            photoDiv.appendChild(img);
+            photoDiv.appendChild(descDiv);
+            photoGallery.appendChild(photoDiv);
+
+            photoDiv.addEventListener('click', function () {
+                currentPhotoId = id;
+                document.getElementById('letter-content').value = letter;
+                letterModal.style.display = 'block';
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', async function () {
             const fileUpload = document.getElementById('file-upload');
-            const photoGallery = document.getElementById('photo-gallery');
             const letterModal = document.getElementById('letter-modal');
             const closeBtn = document.querySelector('.close');
             const saveLetterBtn = document.getElementById('save-letter-btn');
-            let currentPhotoDiv;
             let currentPhotoId;
 
             fileUpload.addEventListener('change', function (event) {
@@ -93,45 +119,17 @@
                 addPhotoToGallery(docRef.id, src, description, '');
             }
 
-            function addPhotoToGallery(id, src, description, letter) {
-                const photoDiv = document.createElement('div');
-                photoDiv.className = 'photo';
-                photoDiv.setAttribute('data-id', id);
-                photoDiv.setAttribute('data-description', description);
-
-                const img = document.createElement('img');
-                img.src = src;
-                img.alt = description;
-
-                const descDiv = document.createElement('div');
-                descDiv.className = 'description';
-                descDiv.textContent = description;
-
-                photoDiv.appendChild(img);
-                photoDiv.appendChild(descDiv);
-                photoGallery.appendChild(photoDiv);
-
-                photoDiv.addEventListener('click', function () {
-                    currentPhotoDiv = photoDiv;
-                    currentPhotoId = id;
-                    document.getElementById('letter-content').value = letter;
-                    letterModal.style.display = 'block';
-                });
-            }
-
-
             closeBtn.addEventListener('click', function () {
                 letterModal.style.display = 'none';
             });
 
             saveLetterBtn.addEventListener('click', async function () {
                 const letterContent = document.getElementById('letter-content').value;
-                if (currentPhotoDiv) {
-                    const description = currentPhotoDiv.getAttribute('data-description');
+                if (currentPhotoId) {
                     await updateDoc(doc(db, 'photos', currentPhotoId), {
-                        description,
                         letter: letterContent
                     });
+                    const currentPhotoDiv = document.querySelector(`.photo[data-id="${currentPhotoId}"]`);
                     currentPhotoDiv.setAttribute('data-description', `작성자: ${letterContent}`);
                     currentPhotoDiv.querySelector('.description').textContent = `작성자: ${letterContent}`;
                     letterModal.style.display = 'none';
@@ -139,7 +137,7 @@
             });
 
             window.addEventListener('click', function (event) {
-                if (event.target == letterModal) {
+                if (event.target === letterModal) {
                     letterModal.style.display = 'none';
                 }
             });
