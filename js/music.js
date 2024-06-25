@@ -197,6 +197,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function changeBackgroundImage() {
         const randomImage = images[Math.floor(Math.random() * images.length)];
+        
         document.body.style.backgroundImage = `url(${randomImage})`;
         document.body.style.opacity = '0.8'; // 약간 불투명하게 설정
         document.body.style.width = '100%';
@@ -207,7 +208,7 @@ document.addEventListener('DOMContentLoaded', function () {
     changeBackgroundImage();
 
     // 일정 시간마다 배경 이미지를 변경합니다.
-    setInterval(changeBackgroundImage, 2000); // 5초마다 배경 이미지 변경
+    setInterval(changeBackgroundImage, 3000); // 3초마다 배경 이미지 변경
 
 });
 
