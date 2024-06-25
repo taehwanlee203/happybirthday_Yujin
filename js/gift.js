@@ -9,7 +9,7 @@ const gifts = [
     },
     {
         name: '명품 옷',
-        image: 'images/clothes.jpg'
+        image: 'images/cardigan.jpg'
     }
 ];
 

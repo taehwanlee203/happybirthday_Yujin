@@ -51,14 +51,19 @@ nav a:hover {
     gap: 100px;
 }
 
+.opened {
+    width: 150px;
+}
+
 .gift-box {
     width: 150px;
+    height: 160px;
     cursor: pointer;
     transition: transform 0.3s ease;
 }
 
 .gift-box:hover {
-    transform: scale(1.1);
+    transform: scale(1.2);
 }
 
 #gift-message {
@@ -67,8 +72,9 @@ nav a:hover {
 
 #gift-message img {
     max-width: 200px;
+    height: 200px;
     display: block;
-    margin: 10px auto;
+    margin: 0 auto;
 }
 
 p#gift-text {
