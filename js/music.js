@@ -240,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function () {
     changeBackgroundImage();
 
     // 일정 시간마다 배경 이미지를 변경합니다.
-    setInterval(changeBackgroundImage, 5000); // 5초마다 배경 이미지 변경
+    setInterval(changeBackgroundImage, 2000); // 5초마다 배경 이미지 변경
 
 });
 
