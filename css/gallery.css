@@ -148,3 +148,7 @@ textarea {
     font-size: 1em;
     margin-bottom: 10px;
 }
+
+input#letter-name {
+    margin-bottom: 10px;
+}
