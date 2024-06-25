@@ -1,7 +1,7 @@
-// Firestore에서 사진 데이터 불러오기
-async function loadPhotos() {
-    const snapshot = await getDocs(collection(db, 'photos'));
-    snapshot.forEach(doc => {
+ // Firestore에서 사진 데이터 불러오기
+ async function loadPhotos() {
+    const querySnapshot = await getDocs(collection(db, 'photos'));
+    querySnapshot.forEach((doc) => {
         const data = doc.data();
         addPhotoToGallery(doc.id, data.src, data.description, data.letter);
     });
