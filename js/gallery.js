@@ -1,21 +1,30 @@
 document.addEventListener('DOMContentLoaded', function() {
     const fileUpload = document.getElementById('file-upload');
-    const takePhotoBtn = document.getElementById('take-photo-btn');
+    const addPresetPhotoBtn = document.getElementById('add-preset-photo-btn');
+    const addUploadedPhotoBtn = document.getElementById('add-uploaded-photo-btn');
+    const presetPhotos = document.getElementById('preset-photos');
     const photoGallery = document.getElementById('photo-gallery');
+    const letterModal = document.getElementById('letter-modal');
+    const closeBtn = document.querySelector('.close');
+    const saveLetterBtn = document.getElementById('save-letter-btn');
+    let currentPhotoDiv;
 
-    // Handle file upload
-    fileUpload.addEventListener('change', function(event) {
-        const file = event.target.files[0];
+    addPresetPhotoBtn.addEventListener('click', function() {
+        const selectedPhoto = presetPhotos.value;
+        addPhotoToGallery(selectedPhoto, '작성자:');
+    });
+
+    addUploadedPhotoBtn.addEventListener('click', function() {
+        const file = fileUpload.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onload = function(e) {
-                addPhotoToGallery(e.target.result, 'Uploaded Photo');
+                addPhotoToGallery(e.target.result, '작성자:');
             };
             reader.readAsDataURL(file);
         }
     });
 
-    // Add photo to gallery
     function addPhotoToGallery(src, description) {
         const photoDiv = document.createElement('div');
         photoDiv.className = 'photo';
@@ -28,31 +37,36 @@ document.addEventListener('DOMContentLoaded', function() {
         const descDiv = document.createElement('div');
         descDiv.className = 'description';
         descDiv.textContent = description;
-        descDiv.addEventListener('click', function() {
-            const currentDescription = photoDiv.getAttribute('data-description');
-            const newDescription = prompt("Enter new description:", currentDescription);
-            if (newDescription !== null) {
-                descDiv.textContent = newDescription;
-                photoDiv.setAttribute('data-description', newDescription);
-            }
-        });
 
         photoDiv.appendChild(img);
         photoDiv.appendChild(descDiv);
         photoGallery.appendChild(photoDiv);
+
+        photoDiv.addEventListener('click', function() {
+            currentPhotoDiv = photoDiv;
+            letterModal.style.display = 'block';
+        });
     }
 
-    // Handle editing existing photo descriptions
-    photoGallery.addEventListener('click', function(event) {
-        const target = event.target;
-        if (target.classList.contains('description')) {
-            const photoDiv = target.parentElement;
-            const currentDescription = photoDiv.getAttribute('data-description');
-            const newDescription = prompt("Enter new description:", currentDescription);
-            if (newDescription !== null) {
-                target.textContent = newDescription;
-                photoDiv.setAttribute('data-description', newDescription);
-            }
+    closeBtn.addEventListener('click', function() {
+        letterModal.style.display = 'none';
+    });
+
+    saveLetterBtn.addEventListener('click', function() {
+        const letterContent = document.getElementById('letter-content').value;
+        const letterName = document.getElementById('letter-name').value;
+        
+
+        if (currentPhotoDiv) {
+            currentPhotoDiv.setAttribute('data-description', `작성자: ${letterName}`);
+            currentPhotoDiv.querySelector('.description').textContent = `작성자: ${letterName}`;
+            letterModal.style.display = 'none';
+        }
+    });
+
+    window.addEventListener('click', function(event) {
+        if (event.target == letterModal) {
+            letterModal.style.display = 'none';
         }
     });
 });

@@ -11,28 +11,49 @@
     <nav>
         <a href="index2.html">Home</a>
     </nav>
-    <div class="container">
+    <!-- <div class="container">
         <h1></h1>
         <div class="upload-buttons">
             <input type="file" id="file-upload" accept="image/*">
-            <!-- <button id="take-photo-btn">Take Photo</button> -->
         </div>
         <div class="photos" id="photo-gallery">
             <div class="photo" data-description="Memory 1">
                 <img src="images/section3.jpg" alt="Memory 1">
-                <div class="description">Memory 1</div>
+                <div class="description">2024-06-30</div>
             </div>
             <div class="photo" data-description="Memory 2">
                 <img src="images/section3.jpg" alt="Memory 2">
-                <div class="description">Memory 2</div>
+                <div class="description">2024-06-30</div>
             </div>
             <div class="photo" data-description="Memory 3">
                 <img src="images/section3.jpg" alt="Memory 3">
-                <div class="description">Memory 3</div>
+                <div class="description">2024-06-30</div>
             </div>
         </div>
-        <!-- <video id="camera" width="640" height="480" autoplay style="display: none;"></video>
-        <canvas id="photo-canvas" width="640" height="480" style="display: none;"></canvas> -->
+    </div> -->
+    <div class="container">
+        <h1>편지 갤러리</h1>
+        <div class="upload-buttons">
+            <label for="preset-photos">저장된 우표:</label>
+            <select id="preset-photos">
+                <option value="images/section3.jpg">우표 1</option>
+                <option value="images/logo.jpg">우표 2</option>
+                <option value="images/upload_test.jpg">우표 3</option>
+            </select>
+            <button id="add-preset-photo-btn">편지 생성</button>
+            <input type="file" id="file-upload" accept="image/*">
+            <button id="add-uploaded-photo-btn">우표 사진 업로드</button>
+        </div>
+        <div class="photos" id="photo-gallery"></div>
+    </div>
+    <div id="letter-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>편지 작성</h2>
+            <input id="letter-name" type="text" placeholder="이름" size="10"/>
+            <textarea id="letter-content" placeholder="편지 내용을 입력하세요"></textarea>
+            <button id="save-letter-btn">저장</button>
+        </div>
     </div>
     <script src="js/gallery.js"></script>
 </body>
