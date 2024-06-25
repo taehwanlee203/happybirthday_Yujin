@@ -75,6 +75,7 @@ h2 {
     align-items: center;
     background-color: rgba(0, 0, 0, 0.6);
     border-radius: 15px;
+    padding: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
