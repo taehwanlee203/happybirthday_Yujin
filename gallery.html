@@ -29,7 +29,7 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>편지 작성</h2>
-            <input id="letter-name" type="text" placeholder="이름" size="10"/>
+            <input id="letter-name" type="text" placeholder="이름" size="10" />
             <textarea id="letter-content" placeholder="편지 내용을 입력하세요"></textarea>
             <button id="save-letter-btn">저장</button>
         </div>
@@ -41,12 +41,14 @@
 
         // Firebase configuration
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_AUTH_DOMAIN",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_STORAGE_BUCKET",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
+            apiKey: "AIzaSyDiAVJSPBR6UP0dAk2J-vzcUbK7AsUCCjY",
+            authDomain: "happybirthdayyujin-1d294.firebaseapp.com",
+            databaseURL: "https://happybirthdayyujin-1d294-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "happybirthdayyujin-1d294",
+            storageBucket: "happybirthdayyujin-1d294.appspot.com",
+            messagingSenderId: "523010029657",
+            appId: "1:523010029657:web:0c7a29fdb1cc7383b5d948",
+            measurementId: "G-XVPGR3WKT2"
         };
 
         // Initialize Firebase
@@ -62,7 +64,7 @@
             });
         }
 
-        document.addEventListener('DOMContentLoaded', async function() {
+        document.addEventListener('DOMContentLoaded', async function () {
             const fileUpload = document.getElementById('file-upload');
             const photoGallery = document.getElementById('photo-gallery');
             const letterModal = document.getElementById('letter-modal');
@@ -71,11 +73,11 @@
             let currentPhotoDiv;
             let currentPhotoId;
 
-            fileUpload.addEventListener('change', function(event) {
+            fileUpload.addEventListener('change', function (event) {
                 const file = event.target.files[0];
                 if (file) {
                     const reader = new FileReader();
-                    reader.onload = function(e) {
+                    reader.onload = function (e) {
                         const src = e.target.result;
                         const description = '작성자:';
                         addPhotoToServer(src, description);
@@ -111,7 +113,7 @@
                 photoDiv.appendChild(descDiv);
                 photoGallery.appendChild(photoDiv);
 
-                photoDiv.addEventListener('click', function() {
+                photoDiv.addEventListener('click', function () {
                     currentPhotoDiv = photoDiv;
                     currentPhotoId = id;
                     document.getElementById('letter-content').value = letter;
@@ -119,11 +121,11 @@
                 });
             }
 
-            closeBtn.addEventListener('click', function() {
+            closeBtn.addEventListener('click', function () {
                 letterModal.style.display = 'none';
             });
 
-            saveLetterBtn.addEventListener('click', async function() {
+            saveLetterBtn.addEventListener('click', async function () {
                 const letterContent = document.getElementById('letter-content').value;
                 if (currentPhotoDiv) {
                     const description = currentPhotoDiv.getAttribute('data-description');
@@ -137,7 +139,7 @@
                 }
             });
 
-            window.addEventListener('click', function(event) {
+            window.addEventListener('click', function (event) {
                 if (event.target == letterModal) {
                     letterModal.style.display = 'none';
                 }
