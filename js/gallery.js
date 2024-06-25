@@ -1,47 +1,37 @@
- // Firestore에서 사진 데이터 불러오기
- async function loadPhotos() {
-    const querySnapshot = await getDocs(collection(db, 'photos'));
-    querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        addPhotoToGallery(doc.id, data.src, data.description, data.letter);
-    });
-}
-
-document.addEventListener('DOMContentLoaded', async function() {
+document.addEventListener('DOMContentLoaded', function () {
     const fileUpload = document.getElementById('file-upload');
+    const addPresetPhotoBtn = document.getElementById('add-preset-photo-btn');
+    const addUploadedPhotoBtn = document.getElementById('add-uploaded-photo-btn');
+    const presetPhotos = document.getElementById('preset-photos');
     const photoGallery = document.getElementById('photo-gallery');
     const letterModal = document.getElementById('letter-modal');
     const closeBtn = document.querySelector('.close');
     const saveLetterBtn = document.getElementById('save-letter-btn');
     let currentPhotoDiv;
-    let currentPhotoId;
 
-    fileUpload.addEventListener('change', function(event) {
-        const file = event.target.files[0];
+
+     addPresetPhotoBtn.addEventListener('click', function() {
+        const selectedPhoto = presetPhotos.value;
+        addPhotoToGallery(selectedPhoto, '작성자:');
+    });
+
+    addUploadedPhotoBtn.addEventListener('click', function() {
+        const file = fileUpload.files[0];
+
         if (file) {
             const reader = new FileReader();
-            reader.onload = function(e) {
-                const src = e.target.result;
-                const description = '작성자:';
-                addPhotoToServer(src, description);
+            reader.onload = function (e) {
+                addPhotoToGallery(e.target.result, '작성자:');
+
             };
             reader.readAsDataURL(file);
         }
     });
 
-    async function addPhotoToServer(src, description) {
-        const docRef = await addDoc(collection(db, 'photos'), {
-            src,
-            description,
-            letter: ''
-        });
-        addPhotoToGallery(docRef.id, src, description, '');
-    }
-
-    function addPhotoToGallery(id, src, description, letter) {
+    function addPhotoToGallery(src, description) {
         const photoDiv = document.createElement('div');
         photoDiv.className = 'photo';
-        photoDiv.setAttribute('data-id', id);
+
         photoDiv.setAttribute('data-description', description);
 
         const img = document.createElement('img');
@@ -58,36 +48,25 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         photoDiv.addEventListener('click', function() {
             currentPhotoDiv = photoDiv;
-            currentPhotoId = id;
-            document.getElementById('letter-content').value = letter;
+
             letterModal.style.display = 'block';
         });
     }
 
     closeBtn.addEventListener('click', function() {
+        
+    letterModal.style.display = 'none';
+});
+
+saveLetterBtn.addEventListener('click', function () {
+    const letterContent = document.getElementById('letter-content').value;
+    const letterName = document.getElementById('letter-name').value;
+
+
+    if (currentPhotoDiv) {
+        currentPhotoDiv.setAttribute('data-description', `작성자: ${letterName}`);
+        currentPhotoDiv.querySelector('.description').textContent = `작성자: ${letterName}`;
         letterModal.style.display = 'none';
-    });
-
-    saveLetterBtn.addEventListener('click', async function() {
-        const letterContent = document.getElementById('letter-content').value;
-        if (currentPhotoDiv) {
-            const description = currentPhotoDiv.getAttribute('data-description');
-            const photoDoc = doc(db, 'photos', currentPhotoId);
-            await updateDoc(photoDoc, {
-                description,
-                letter: letterContent
-            });
-            currentPhotoDiv.setAttribute('data-description', `작성자: ${letterContent}`);
-            currentPhotoDiv.querySelector('.description').textContent = `작성자: ${letterContent}`;
-            letterModal.style.display = 'none';
-        }
-    });
-
-    window.addEventListener('click', function(event) {
-        if (event.target == letterModal) {
-            letterModal.style.display = 'none';
-        }
-    });
-
-    await loadPhotos();
+    }
+});
 });
