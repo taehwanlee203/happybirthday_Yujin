@@ -198,12 +198,14 @@ document.addEventListener('DOMContentLoaded', function () {
     function changeBackgroundImage() {
         const randomImage = images[Math.floor(Math.random() * images.length)];
         
+        const img = new Image();
+        img.src = randomImage;
+        img.onload = () => {
         document.body.style.backgroundImage = `url(${randomImage})`;
-        document.body.style.opacity = '0.8'; // 약간 불투명하게 설정
-        document.body.style.width = '100%';
-        document.body.style.height = '100%';
+        document.body.style.opacity = '0.6'; // 약간 불투명하게 설정
+        document.body.style.height = '100%'; // 약간 불투명하게 설정
     }
-
+}
     // 처음 로드 시 배경 이미지를 변경합니다.
     changeBackgroundImage();
 

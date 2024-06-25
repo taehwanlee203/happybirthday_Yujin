@@ -20,6 +20,8 @@ h2 {
     font-size: 1.7em;
     font-family: 'LOTTERIACHAB';
     color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin: 20px 0;
 }
 
 .section {
@@ -28,7 +30,8 @@ h2 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-top: 0px; /* Adjust padding to match header height */
+    text-align: center;
+    padding: 0 20px; /* Adjust padding to match header height */
     background-size: cover;
 }
 
@@ -44,22 +47,33 @@ h2 {
     color: #fff;
     border: none;
     cursor: pointer;
+    border-radius: 25px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+}
+
+#play-song-btn:hover {
+    background-color: #9a68cc;
 }
 
 .lyrics-container {
     font-size: 1.5em;
-    width: 350px;
+    width: 320px;
     height: 280px; /* Adjust as needed */
     display: flex;
     flex-direction: column;
     justify-content: center;
     font-weight: bold;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .lyric-line {
     opacity: 0.5;
+    transition: opacity 0.5s ease;
 }
 
 .lyric-line.current {
