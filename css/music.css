@@ -1,7 +1,11 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #121212;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-image 1s ease-in-out;
+    background-color: rgba(0, 0, 0, 0.8); /* 불투명도 설정 */
     color: #e0e0e0;
     overflow-x: hidden;
     scroll-behavior: smooth;
@@ -12,6 +16,7 @@ h2 {
     font-weight: bold;
     font-size: 1.7em;
     font-family: 'LOTTERIACHAB';
+    color: #fff;
 }
 
 .section {
@@ -20,9 +25,8 @@ h2 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-top: 60px; /* Adjust padding to match header height */
+    padding-top: 0px; /* Adjust padding to match header height */
     background-size: cover;
-    background-position: center;
 }
 
 /* song */
@@ -37,17 +41,18 @@ h2 {
     color: #fff;
     border: none;
     cursor: pointer;
-    margin-bottom: 20px;
 }
 
 .lyrics-container {
     font-size: 1.5em;
-    margin-top: 20px;
-    height: 150px; /* Adjust as needed */
+    width: 350px;
+    height: 280px; /* Adjust as needed */
     display: flex;
     flex-direction: column;
     justify-content: center;
+    font-weight: bold;
     align-items: center;
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .lyric-line {
