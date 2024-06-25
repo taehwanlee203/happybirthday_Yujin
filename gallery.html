@@ -35,6 +35,31 @@
             <button id="save-letter-btn">저장</button>
         </div>
     </div>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyDiAVJSPBR6UP0dAk2J-vzcUbK7AsUCCjY",
+          authDomain: "happybirthdayyujin-1d294.firebaseapp.com",
+          projectId: "happybirthdayyujin-1d294",
+          storageBucket: "happybirthdayyujin-1d294.appspot.com",
+          messagingSenderId: "523010029657",
+          appId: "1:523010029657:web:0c7a29fdb1cc7383b5d948",
+          measurementId: "G-XVPGR3WKT2"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+      </script>
+       <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js"></script>
+       <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js"></script>
     <script src="js/gallery.js"></script>
 </body>
 </html>

@@ -1,33 +1,60 @@
-document.addEventListener('DOMContentLoaded', function() {
+// Firebase 초기화
+const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_AUTH_DOMAIN",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_STORAGE_BUCKET",
+    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+    appId: "YOUR_APP_ID"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+// Firestore에서 사진 데이터 불러오기
+async function loadPhotos() {
+    const snapshot = await db.collection('photos').get();
+    snapshot.forEach(doc => {
+        const data = doc.data();
+        addPhotoToGallery(doc.id, data.src, data.description, data.letter);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', async function() {
     const fileUpload = document.getElementById('file-upload');
-    const addPresetPhotoBtn = document.getElementById('add-preset-photo-btn');
-    const addUploadedPhotoBtn = document.getElementById('add-uploaded-photo-btn');
-    const presetPhotos = document.getElementById('preset-photos');
     const photoGallery = document.getElementById('photo-gallery');
     const letterModal = document.getElementById('letter-modal');
     const closeBtn = document.querySelector('.close');
     const saveLetterBtn = document.getElementById('save-letter-btn');
     let currentPhotoDiv;
+    let currentPhotoId;
 
-    addPresetPhotoBtn.addEventListener('click', function() {
-        const selectedPhoto = presetPhotos.value;
-        addPhotoToGallery(selectedPhoto, '작성자:');
-    });
-
-    addUploadedPhotoBtn.addEventListener('click', function() {
-        const file = fileUpload.files[0];
+    fileUpload.addEventListener('change', function(event) {
+        const file = event.target.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onload = function(e) {
-                addPhotoToGallery(e.target.result, '작성자:');
+                const src = e.target.result;
+                const description = '작성자:';
+                addPhotoToServer(src, description);
             };
             reader.readAsDataURL(file);
         }
     });
 
-    function addPhotoToGallery(src, description) {
+    async function addPhotoToServer(src, description) {
+        const docRef = await db.collection('photos').add({
+            src,
+            description,
+            letter: ''
+        });
+        addPhotoToGallery(docRef.id, src, description, '');
+    }
+
+    function addPhotoToGallery(id, src, description, letter) {
         const photoDiv = document.createElement('div');
         photoDiv.className = 'photo';
+        photoDiv.setAttribute('data-id', id);
         photoDiv.setAttribute('data-description', description);
 
         const img = document.createElement('img');
@@ -44,6 +71,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         photoDiv.addEventListener('click', function() {
             currentPhotoDiv = photoDiv;
+            currentPhotoId = id;
+            document.getElementById('letter-content').value = letter;
             letterModal.style.display = 'block';
         });
     }
@@ -52,14 +81,16 @@ document.addEventListener('DOMContentLoaded', function() {
         letterModal.style.display = 'none';
     });
 
-    saveLetterBtn.addEventListener('click', function() {
+    saveLetterBtn.addEventListener('click', async function() {
         const letterContent = document.getElementById('letter-content').value;
-        const letterName = document.getElementById('letter-name').value;
-        
-
         if (currentPhotoDiv) {
-            currentPhotoDiv.setAttribute('data-description', `작성자: ${letterName}`);
-            currentPhotoDiv.querySelector('.description').textContent = `작성자: ${letterName}`;
+            const description = currentPhotoDiv.getAttribute('data-description');
+            await db.collection('photos').doc(currentPhotoId).update({
+                description,
+                letter: letterContent
+            });
+            currentPhotoDiv.setAttribute('data-description', `작성자: ${letterContent}`);
+            currentPhotoDiv.querySelector('.description').textContent = `작성자: ${letterContent}`;
             letterModal.style.display = 'none';
         }
     });
@@ -69,4 +100,6 @@ document.addEventListener('DOMContentLoaded', function() {
             letterModal.style.display = 'none';
         }
     });
+
+    await loadPhotos();
 });
