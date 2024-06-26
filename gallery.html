@@ -166,15 +166,6 @@
 import { getFirestore, collection, getDocs, addDoc, updateDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
-const firebaseConfig = {
-    apiKey: "AIzaSyDiAVJSPBR6UP0dAk2J-vzcUbK7AsUCCjY",
-    authDomain: "happybirthdayyujin-1d294.firebaseapp.com",
-    projectId: "happybirthdayyujin-1d294",
-    storageBucket: "happybirthdayyujin-1d294.appspot.com",
-    messagingSenderId: "523010029657",
-    appId: "1:523010029657:web:0c7a29fdb1cc7383b5d948",
-};
-
 document.addEventListener('DOMContentLoaded', async function () {
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
