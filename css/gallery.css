@@ -3,7 +3,6 @@ body {
     font-family: Arial, sans-serif;
     color: #e0e0e0;
     background-image: linear-gradient(to right, #E55D87, #5FC3E4);
-
     overflow: auto;
 }
 
@@ -120,15 +119,22 @@ h1 {
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.5);
+    
 }
 
 .modal-content {
     background-color: #fefefe;
+    transform: translateY(-50%);
+    top: 50%;
+    left: 0;
+    position: relative;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 85%;
+    width: 80%;
     max-width: 600px;
+    background-color: #fefefe;
+    
 }
 
 .close {
