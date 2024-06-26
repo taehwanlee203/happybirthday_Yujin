@@ -16,7 +16,6 @@
     <div class="container">
         <h1>편지 갤러리</h1>
         <div class="upload-buttons">
-            <label for="preset-photos">저장된 우표:</label>
             <select id="preset-photos">
                 <option value="images/section3.jpg">우표 1</option>
                 <option value="images/logo.jpg">우표 2</option>
@@ -24,6 +23,7 @@
             </select>
             <button id="add-preset-photo-btn">편지 생성</button>
             <input type="file" id="file-upload" accept="image/*">
+            <label for="file-upload" class="custom-file-upload">파일 선택</label>
             <button id="add-uploaded-photo-btn">우표 사진 업로드</button>
         </div>
         <div class="photos" id="photo-gallery"></div>
