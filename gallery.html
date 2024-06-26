@@ -230,6 +230,7 @@
                 });
             }
 
+            async function addPhotoToServer(src, description) {
                 try {
                     const docRef = await addDoc(collection(db, 'photos'), {
                         src,
