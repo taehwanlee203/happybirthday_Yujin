@@ -39,8 +39,8 @@
     <script type="module">
 
         // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getFirestore, collection, getDocs, addDoc, updateDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        // import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        // import { getFirestore, collection, getDocs, addDoc, updateDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
         // Firebase configuration
         const firebaseConfig = {
@@ -162,9 +162,23 @@
 
         //     await loadPhotos();
         // });
-        document.addEventListener('DOMContentLoaded', async function () {
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, getDocs, addDoc, updateDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDiAVJSPBR6UP0dAk2J-vzcUbK7AsUCCjY",
+    authDomain: "happybirthdayyujin-1d294.firebaseapp.com",
+    projectId: "happybirthdayyujin-1d294",
+    storageBucket: "happybirthdayyujin-1d294.appspot.com",
+    messagingSenderId: "523010029657",
+    appId: "1:523010029657:web:0c7a29fdb1cc7383b5d948",
+};
+
+document.addEventListener('DOMContentLoaded', async function () {
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
+    const storage = getStorage(app);
 
     const fileUpload = document.getElementById('file-upload');
     const addUploadedPhotoBtn = document.getElementById('add-uploaded-photo-btn');
@@ -216,7 +230,10 @@
         });
     }
 
-    async function addPhotoToServer(src, description) {
+    async function addPhotoToServer(file, description) {
+        const storageRef = ref(storage, `photos/${file.name}`);
+        await uploadBytes(storageRef, file);
+        const src = await getDownloadURL(storageRef);
         const docRef = await addDoc(collection(db, 'photos'), {
             src,
             description,
@@ -234,13 +251,7 @@
     addUploadedPhotoBtn.addEventListener('click', function () {
         const file = fileUpload.files[0];
         if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                const src = e.target.result;
-                const description = document.getElementById('letter-name').value;
-                addPhotoToServer(src, description);
-            };
-            reader.readAsDataURL(file);
+            addPhotoToServer(file, document.getElementById('letter-name').value);
         } else {
             alert("파일을 선택하세요.");
         }
