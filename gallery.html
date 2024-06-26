@@ -42,17 +42,17 @@
         // import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         // import { getFirestore, collection, getDocs, addDoc, updateDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-        // Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyDiAVJSPBR6UP0dAk2J-vzcUbK7AsUCCjY",
-            authDomain: "happybirthdayyujin-1d294.firebaseapp.com",
-            projectId: "happybirthdayyujin-1d294",
-            storageBucket: "happybirthdayyujin-1d294.appspot.com",
-            messagingSenderId: "523010029657",
-            appId: "1:523010029657:web:0c7a29fdb1cc7383b5d948",
-        };
+        // // Firebase configuration
+        // const firebaseConfig = {
+        //     apiKey: "AIzaSyDiAVJSPBR6UP0dAk2J-vzcUbK7AsUCCjY",
+        //     authDomain: "happybirthdayyujin-1d294.firebaseapp.com",
+        //     projectId: "happybirthdayyujin-1d294",
+        //     storageBucket: "happybirthdayyujin-1d294.appspot.com",
+        //     messagingSenderId: "523010029657",
+        //     appId: "1:523010029657:web:0c7a29fdb1cc7383b5d948",
+        // };
 
-        // Initialize Firebase
+        // // Initialize Firebase
         // document.addEventListener('DOMContentLoaded', async function () {
         //     const app = initializeApp(firebaseConfig);
         //     const db = getFirestore(app);
@@ -166,6 +166,15 @@
         import { getFirestore, collection, getDocs, addDoc, updateDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
         import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
+        const firebaseConfig = {
+            apiKey: "AIzaSyDiAVJSPBR6UP0dAk2J-vzcUbK7AsUCCjY",
+            authDomain: "happybirthdayyujin-1d294.firebaseapp.com",
+            projectId: "happybirthdayyujin-1d294",
+            storageBucket: "happybirthdayyujin-1d294.appspot.com",
+            messagingSenderId: "523010029657",
+            appId: "1:523010029657:web:0c7a29fdb1cc7383b5d948",
+        };
+
         document.addEventListener('DOMContentLoaded', async function () {
             const app = initializeApp(firebaseConfig);
             const db = getFirestore(app);
@@ -221,12 +230,7 @@
                 });
             }
 
-            async function addPhotoToServer(file, description) {
                 try {
-                    console.log("Uploading file:", file.name);
-                    const storageRef = ref(storage, `photos/${file.name}`);
-                    await uploadBytes(storageRef, file);
-                    const src = await getDownloadURL(storageRef);
                     const docRef = await addDoc(collection(db, 'photos'), {
                         src,
                         description,
@@ -234,8 +238,8 @@
                     });
                     addPhotoToGallery(docRef.id, src, description, '');
                 } catch (error) {
-                    console.error("Error uploading file:", error);
-                    alert("사진 업로드 중 오류가 발생했습니다.");
+                    console.error("Error adding photo:", error);
+                    alert("사진 추가 중 오류가 발생했습니다.");
                 }
             }
 
@@ -249,7 +253,13 @@
                 const file = fileUpload.files[0];
                 if (file) {
                     console.log("File selected:", file.name);
-                    addPhotoToServer(file, document.getElementById('letter-name').value);
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        const src = e.target.result;
+                        const description = document.getElementById('letter-name').value;
+                        addPhotoToServer(src, description);
+                    };
+                    reader.readAsDataURL(file);
                 } else {
                     alert("파일을 선택하세요.");
                 }
@@ -282,7 +292,6 @@
 
             await loadPhotos();
         });
-
     </script>
     <!-- <script src="js/gallery.js"></script> -->
 </body>
