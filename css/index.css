@@ -129,6 +129,14 @@ body {
     animation-delay: 2.5s; /* 다른 풍선과 애니메이션을 비동기화 */
 }
 
+.balloon8 {
+    width: 200px;
+    font-size: 2em;
+    color: #94ffba;
+    left: 40%;
+    animation-delay: 3.2s; /* 다른 풍선과 애니메이션을 비동기화 */
+}
+
 /* 기본 풍선 */
 .balloon5 {
     font-size: 8em;
