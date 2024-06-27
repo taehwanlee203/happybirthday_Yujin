@@ -100,7 +100,7 @@ h1 {
     background: rgba(0, 0, 0, 0.7);
     color: #fff;
     text-align: center;
-    padding: 5px 0;
+    padding: 20px 0;
     opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -174,17 +174,12 @@ input#letter-name {
     
 }
 
-/* .custom-file-upload {
-    display: inline-block;
-    padding: 15px 8px;
-    cursor: pointer;
-    
-    color: white;
-    border: none;
-    border-radius: 4px;
-    text-align: center;
+/* 편지 내용 */
+h2.letter-title {
+    color: rgb(33, 33, 33);
 }
 
-.custom-file-upload:hover {
-    background-color: #9a68cc;
-} */
+p#letter-name-view,
+p#letter-content-view {
+    color: rgb(33, 33, 33);
+}

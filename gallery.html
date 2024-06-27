@@ -30,14 +30,22 @@
     <div id="letter-modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2>편지 작성</h2>
-            <input id="letter-name" type="text" placeholder="이름" size="10" />
-            <textarea id="letter-content" placeholder="편지 내용을 입력하세요"></textarea>
-            <button id="save-letter-btn">저장</button>
+            <div id="view-letter">
+                <h2 class="letter-title">편지 내용</h2>
+                <p id="letter-name-view"></p>
+                <p id="letter-content-view"></p>
+                <button id="edit-letter-btn">수정</button>
+            </div>
+            <div id="edit-letter" style="display: none;">
+                <h2>편지 수정</h2>
+                <input id="letter-name" type="text" placeholder="이름" size="10" />
+                <textarea id="letter-content" placeholder="편지 내용을 입력하세요"></textarea>
+                <button id="save-letter-btn">저장</button>
+            </div>
         </div>
     </div>
     <script type="module">
-       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getFirestore, collection, getDocs, addDoc, updateDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
         import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
@@ -62,6 +70,9 @@
             const letterModal = document.getElementById('letter-modal');
             const closeBtn = document.querySelector('.close');
             const saveLetterBtn = document.getElementById('save-letter-btn');
+            const editLetterBtn = document.getElementById('edit-letter-btn');
+            const viewLetter = document.getElementById('view-letter');
+            const editLetter = document.getElementById('edit-letter');
             let currentPhotoId;
             let currentPhotoDiv;
 
@@ -98,9 +109,10 @@
                 photoDiv.addEventListener('click', function () {
                     currentPhotoId = id;
                     currentPhotoDiv = photoDiv;
-                    document.getElementById('letter-name').value = description;
-                    document.getElementById('letter-content').value = letter;
-                    saveLetterBtn.textContent = '편지 수정';
+                    document.getElementById('letter-name-view').textContent = `작성자: ${description}`;
+                    document.getElementById('letter-content-view').textContent = letter;
+                    viewLetter.style.display = 'block';
+                    editLetter.style.display = 'none';
                     letterModal.style.display = 'block';
                 });
             }
@@ -148,6 +160,14 @@
                 }
             });
 
+            editLetterBtn.addEventListener('click', function () {
+                viewLetter.style.display = 'none';
+                editLetter.style.display = 'block';
+                document.getElementById('letter-name').value = currentPhotoDiv.getAttribute('data-description');
+                document.getElementById('letter-content').value = currentPhotoDiv.getAttribute('data-letter');
+                saveLetterBtn.textContent = '저장';
+            });
+
             saveLetterBtn.addEventListener('click', async function () {
                 const description = document.getElementById('letter-name').value;
                 const letterContent = document.getElementById('letter-content').value;
@@ -159,7 +179,10 @@
                     currentPhotoDiv.setAttribute('data-description', description);
                     currentPhotoDiv.setAttribute('data-letter', letterContent);
                     currentPhotoDiv.querySelector('.description').textContent = `작성자: ${description}`;
-                    letterModal.style.display = 'none';
+                    document.getElementById('letter-name-view').textContent = `작성자: ${description}`;
+                    document.getElementById('letter-content-view').textContent = letterContent;
+                    viewLetter.style.display = 'block';
+                    editLetter.style.display = 'none';
                 }
             });
 
