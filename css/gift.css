@@ -41,7 +41,7 @@ nav a:hover {
     padding: 40px;
     border-radius: 10px;
     max-width: 900px;
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
 /* gift icon */
@@ -51,8 +51,14 @@ nav a:hover {
     gap: 100px;
 }
 
+.opened {
+    width: 150px;
+    height: 100px;
+}
+
 .gift-box {
     width: 150px;
+    height: 100px;
     cursor: pointer;
     transition: transform 0.3s ease;
 }
@@ -62,17 +68,18 @@ nav a:hover {
 }
 
 #gift-message {
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 #gift-message img {
-    max-width: 200px;
+    max-width: 150px;
+    height: 150px;
     display: block;
-    margin: 10px auto;
+    margin: 0 auto;
 }
 
 p#gift-text {
-    margin-top: 30px;
+    margin-top: 10px;
     font-size: 20px;
     font-family: bold;
 }
@@ -88,7 +95,7 @@ button#reset-btn {
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s;
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
 button#reset-btn:hover {

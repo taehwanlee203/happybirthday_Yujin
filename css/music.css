@@ -1,17 +1,34 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #121212;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: crosshair;
+    transition: background-image 1s ease-in-out;
+    background-color: rgba(0, 0, 0, 0.8); /* 불투명도 설정 */
     color: #e0e0e0;
-    overflow-x: hidden;
+    overflow: hidden;
     scroll-behavior: smooth;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
+    padding: 0;
 }
+
+
+body.loading {
+    opacity: 0.5;
+}
+
+
 
 h2 {
     font-weight: bold;
-    font-size: 1.7em;
+    font-size: 1.5em;
     font-family: 'LOTTERIACHAB';
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin: 10px 0;
 }
 
 .section {
@@ -20,9 +37,9 @@ h2 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-top: 60px; /* Adjust padding to match header height */
+    text-align: center;
+    padding: 0 20px; /* Adjust padding to match header height */
     background-size: cover;
-    background-position: center;
 }
 
 /* song */
@@ -32,73 +49,43 @@ h2 {
 
 #play-song-btn {
     padding: 10px 20px;
-    font-size: 1.2em;
+    font-size: 1em;
     background-color: #bb86fc;
-    color: #121212;
+    color: #fff;
     border: none;
     cursor: pointer;
+    border-radius: 25px;
     margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+}
+
+#play-song-btn:hover {
+    background-color: #9a68cc;
 }
 
 .lyrics-container {
-    font-size: 1.5em;
-    margin-top: 20px;
-    height: 150px; /* Adjust as needed */
+    font-size: 1.3em;
+    max-width: 350px;
+    width: 100%;
+    height: 250px; /* Adjust as needed */
     display: flex;
     flex-direction: column;
     justify-content: center;
+    font-weight: bold;
     align-items: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .lyric-line {
     opacity: 0.5;
+    transition: opacity 0.5s ease;
 }
 
 .lyric-line.current {
-    font-size: 1.5em;
+    font-size: 1.2em;
     font-weight: bold;
     opacity: 1;
-}
-
-#balloons {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-}
-
-.ballon {
-    position: absolute;
-    bottom: -100px;
-    width: 50px;
-    height: 70px;
-    background-color: #ff6f61;
-    border-radius: 50%;
-    animation: rise 10s infinite ease-in-out;
-}
-
-.ballon:before {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    width: 2px;
-    height: 10px;
-    background-color: #ff6f61;
-}
-
-@keyframes rise {
-    0% { bottom: -100px; }
-    100% { bottom: 100vh; }
-}
-
-canvas#fireworks {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
 }

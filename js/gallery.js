@@ -1,67 +1,37 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const fileUpload = document.getElementById('file-upload');
-    const takePhotoBtn = document.getElementById('take-photo-btn');
+    const addPresetPhotoBtn = document.getElementById('add-preset-photo-btn');
+    const addUploadedPhotoBtn = document.getElementById('add-uploaded-photo-btn');
+    const presetPhotos = document.getElementById('preset-photos');
     const photoGallery = document.getElementById('photo-gallery');
-    const camera = document.getElementById('camera');
-    const photoCanvas = document.getElementById('photo-canvas');
-    const context = photoCanvas.getContext('2d');
+    const letterModal = document.getElementById('letter-modal');
+    const closeBtn = document.querySelector('.close');
+    const saveLetterBtn = document.getElementById('save-letter-btn');
+    let currentPhotoDiv;
 
-    // Handle file upload
-    fileUpload.addEventListener('change', function(event) {
-        const file = event.target.files[0];
+
+     addPresetPhotoBtn.addEventListener('click', function() {
+        const selectedPhoto = presetPhotos.value;
+        addPhotoToGallery(selectedPhoto, '작성자:');
+    });
+
+    addUploadedPhotoBtn.addEventListener('click', function() {
+        const file = fileUpload.files[0];
+
         if (file) {
             const reader = new FileReader();
-            reader.onload = function(e) {
-                addPhotoToGallery(e.target.result, 'Uploaded Photo');
+            reader.onload = function (e) {
+                addPhotoToGallery(e.target.result, '작성자:');
+
             };
             reader.readAsDataURL(file);
         }
     });
 
-    // Handle take photo
-    takePhotoBtn.addEventListener('click', function() {
-        if (camera.style.display === 'none') {
-            startCamera();
-        } else {
-            takePhoto();
-        }
-    });
-
-    // Start camera
-    function startCamera() {
-        camera.style.display = 'block';
-        takePhotoBtn.textContent = 'Capture Photo';
-        navigator.mediaDevices.getUserMedia({ video: true })
-            .then(stream => {
-                camera.srcObject = stream;
-            })
-            .catch(err => {
-                console.error("Error accessing camera: ", err);
-            });
-    }
-
-    // Take photo
-    function takePhoto() {
-        context.drawImage(camera, 0, 0, photoCanvas.width, photoCanvas.height);
-        const photoData = photoCanvas.toDataURL('image/png');
-        addPhotoToGallery(photoData, 'Taken Photo');
-        stopCamera();
-    }
-
-    // Stop camera
-    function stopCamera() {
-        camera.style.display = 'none';
-        takePhotoBtn.textContent = 'Take Photo';
-        const stream = camera.srcObject;
-        const tracks = stream.getTracks();
-        tracks.forEach(track => track.stop());
-        camera.srcObject = null;
-    }
-
-    // Add photo to gallery
     function addPhotoToGallery(src, description) {
         const photoDiv = document.createElement('div');
         photoDiv.className = 'photo';
+
         photoDiv.setAttribute('data-description', description);
 
         const img = document.createElement('img');
@@ -71,16 +41,32 @@ document.addEventListener('DOMContentLoaded', function() {
         const descDiv = document.createElement('div');
         descDiv.className = 'description';
         descDiv.textContent = description;
-        descDiv.addEventListener('click', function() {
-            const newDescription = prompt("Enter new description:", description);
-            if (newDescription !== null) {
-                descDiv.textContent = newDescription;
-                photoDiv.setAttribute('data-description', newDescription);
-            }
-        });
 
         photoDiv.appendChild(img);
         photoDiv.appendChild(descDiv);
         photoGallery.appendChild(photoDiv);
+
+        photoDiv.addEventListener('click', function() {
+            currentPhotoDiv = photoDiv;
+
+            letterModal.style.display = 'block';
+        });
     }
+
+    closeBtn.addEventListener('click', function() {
+        
+    letterModal.style.display = 'none';
+});
+
+saveLetterBtn.addEventListener('click', function () {
+    const letterContent = document.getElementById('letter-content').value;
+    const letterName = document.getElementById('letter-name').value;
+
+
+    if (currentPhotoDiv) {
+        currentPhotoDiv.setAttribute('data-description', `작성자: ${letterName}`);
+        currentPhotoDiv.querySelector('.description').textContent = `작성자: ${letterName}`;
+        letterModal.style.display = 'none';
+    }
+});
 });

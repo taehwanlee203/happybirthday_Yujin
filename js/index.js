@@ -1,6 +1,6 @@
 window.addEventListener("wheel", function(e){
     e.preventDefault();
-},{passive : false});
+},{passive : true});
 
 var mHtml = $("html");
 var page = 1;
@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const diffSec = Math.floor(diff / 1000 % 60);
 
         if (remainTime) {
-            remainTime.textContent = `${diffHour}시간 ${diffMin}분 ${diffSec}초`;
+            remainTime.textContent = `${diffDay}일 ${diffHour}시간 ${diffMin}분 ${diffSec}초`;
         }
     }
 
