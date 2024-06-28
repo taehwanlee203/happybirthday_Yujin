@@ -35,6 +35,7 @@
                 <p id="letter-name-view"></p>
                 <p id="letter-content-view"></p>
                 <button id="edit-letter-btn">수정</button>
+                <button id="delete-letter-btn">삭제</button>
             </div>
             <div id="edit-letter" style="display: none;">
                 <h2>편지 수정</h2>
@@ -46,7 +47,7 @@
     </div>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getFirestore, collection, getDocs, addDoc, updateDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
         import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
         const firebaseConfig = {
@@ -71,6 +72,7 @@
             const closeBtn = document.querySelector('.close');
             const saveLetterBtn = document.getElementById('save-letter-btn');
             const editLetterBtn = document.getElementById('edit-letter-btn');
+            const deleteLetterBtn = document.getElementById('delete-letter-btn');
             const viewLetter = document.getElementById('view-letter');
             const editLetter = document.getElementById('edit-letter');
             let currentPhotoId;
@@ -186,6 +188,14 @@
                 }
             });
 
+            deleteLetterBtn.addEventListener('click', async function () {
+                if (currentPhotoId) {
+                    await deleteDoc(doc(db, 'photos', currentPhotoId));
+                    currentPhotoDiv.remove();
+                    letterModal.style.display = 'none';
+                }
+            });
+
             closeBtn.addEventListener('click', function () {
                 letterModal.style.display = 'none';
             });
@@ -199,7 +209,6 @@
             await loadPhotos();
         });
     </script>
-    <!-- <script src="js/gallery.js"></script> -->
 </body>
 
 </html>
