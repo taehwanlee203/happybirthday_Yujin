@@ -38,7 +38,7 @@
                 <button id="delete-letter-btn">삭제</button>
             </div>
             <div id="edit-letter" style="display: none;">
-                <h2>편지 수정</h2>
+                <h2 class="letter-modify">편지 수정</h2>
                 <input id="letter-name" type="text" placeholder="이름" size="10" />
                 <textarea id="letter-content" placeholder="편지 내용을 입력하세요"></textarea>
                 <button id="save-letter-btn">저장</button>
@@ -46,6 +46,167 @@
         </div>
     </div>
     <script type="module">
+        // import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        // import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        // import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+
+        // const firebaseConfig = {
+        //     apiKey: "AIzaSyDiAVJSPBR6UP0dAk2J-vzcUbK7AsUCCjY",
+        //     authDomain: "happybirthdayyujin-1d294.firebaseapp.com",
+        //     projectId: "happybirthdayyujin-1d294",
+        //     storageBucket: "happybirthdayyujin-1d294.appspot.com",
+        //     messagingSenderId: "523010029657",
+        //     appId: "1:523010029657:web:0c7a29fdb1cc7383b5d948",
+        // };
+
+        // document.addEventListener('DOMContentLoaded', async function () {
+        //     const app = initializeApp(firebaseConfig);
+        //     const db = getFirestore(app);
+        //     const storage = getStorage(app);
+
+        //     const fileUpload = document.getElementById('file-upload');
+        //     const addUploadedPhotoBtn = document.getElementById('add-uploaded-photo-btn');
+        //     const addPresetPhotoBtn = document.getElementById('add-preset-photo-btn');
+        //     const presetPhotos = document.getElementById('preset-photos');
+        //     const letterModal = document.getElementById('letter-modal');
+        //     const closeBtn = document.querySelector('.close');
+        //     const saveLetterBtn = document.getElementById('save-letter-btn');
+        //     const editLetterBtn = document.getElementById('edit-letter-btn');
+        //     const deleteLetterBtn = document.getElementById('delete-letter-btn');
+        //     const viewLetter = document.getElementById('view-letter');
+        //     const editLetter = document.getElementById('edit-letter');
+        //     let currentPhotoId;
+        //     let currentPhotoDiv;
+
+        //     async function loadPhotos() {
+        //         const snapshot = await getDocs(collection(db, 'photos'));
+        //         snapshot.forEach(doc => {
+        //             const data = doc.data();
+        //             addPhotoToGallery(doc.id, data.src, data.description, data.letter);
+        //         });
+        //     }
+
+        //     // Function to add photo to the gallery
+        //     function addPhotoToGallery(id, src, description, letter) {
+        //         const photoGallery = document.getElementById('photo-gallery');
+        //         const photoDiv = document.createElement('div');
+        //         photoDiv.className = 'photo';
+        //         photoDiv.setAttribute('data-id', id);
+        //         photoDiv.setAttribute('data-description', description);
+        //         photoDiv.setAttribute('data-letter', letter);
+
+        //         const img = document.createElement('img');
+        //         img.src = src;
+        //         img.alt = description;
+
+        //         const descDiv = document.createElement('div');
+        //         descDiv.className = 'description';
+        //         descDiv.textContent = `작성자: ${description}`;
+
+        //         photoDiv.appendChild(img);
+        //         photoDiv.appendChild(descDiv);
+        //         photoGallery.appendChild(photoDiv);
+
+        //         photoDiv.addEventListener('click', function () {
+        //             currentPhotoId = id;
+        //             currentPhotoDiv = photoDiv;
+        //             document.getElementById('letter-name-view').textContent = `작성자: ${description}`;
+        //             document.getElementById('letter-content-view').textContent = letter;
+        //             viewLetter.style.display = 'block';
+        //             editLetter.style.display = 'none';
+        //             letterModal.style.display = 'block';
+        //         });
+        //     }
+
+        //     async function uploadImageToStorage(file) {
+        //         const storageRef = ref(storage, `images/${file.name}`);
+        //         await uploadBytes(storageRef, file);
+        //         return await getDownloadURL(storageRef);
+        //     }
+
+        //     async function addPhotoToServer(src, description) {
+        //         try {
+        //             const docRef = await addDoc(collection(db, 'photos'), {
+        //                 src,
+        //                 description,
+        //                 letter: ''
+        //             });
+        //             addPhotoToGallery(docRef.id, src, description, '');
+        //         } catch (error) {
+        //             console.error("Error adding photo:", error);
+        //             alert("사진 추가 중 오류가 발생했습니다.");
+        //         }
+        //     }
+
+        //     addPresetPhotoBtn.addEventListener('click', function () {
+        //         const selectedPhotoSrc = presetPhotos.value;
+        //         const description = document.getElementById('letter-name').value;
+        //         addPhotoToServer(selectedPhotoSrc, description);
+        //     });
+
+        //     addUploadedPhotoBtn.addEventListener('click', async function () {
+        //         const file = fileUpload.files[0];
+        //         if (file) {
+        //             console.log("File selected:", file.name);
+        //             try {
+        //                 const src = await uploadImageToStorage(file);
+        //                 const description = document.getElementById('letter-name').value;
+        //                 addPhotoToServer(src, description);
+        //             } catch (error) {
+        //                 console.error("Error uploading image:", error);
+        //                 alert("이미지 업로드 중 오류가 발생했습니다.");
+        //             }
+        //         } else {
+        //             alert("파일을 선택하세요.");
+        //         }
+        //     });
+
+        //     editLetterBtn.addEventListener('click', function () {
+        //         viewLetter.style.display = 'none';
+        //         editLetter.style.display = 'block';
+        //         document.getElementById('letter-name').value = currentPhotoDiv.getAttribute('data-description');
+        //         document.getElementById('letter-content').value = currentPhotoDiv.getAttribute('data-letter');
+        //         saveLetterBtn.textContent = '저장';
+        //     });
+
+        //     saveLetterBtn.addEventListener('click', async function () {
+        //         const description = document.getElementById('letter-name').value;
+        //         const letterContent = document.getElementById('letter-content').value;
+        //         if (currentPhotoId) {
+        //             await updateDoc(doc(db, 'photos', currentPhotoId), {
+        //                 description,
+        //                 letter: letterContent
+        //             });
+        //             currentPhotoDiv.setAttribute('data-description', description);
+        //             currentPhotoDiv.setAttribute('data-letter', letterContent);
+        //             currentPhotoDiv.querySelector('.description').textContent = `작성자: ${description}`;
+        //             document.getElementById('letter-name-view').textContent = `작성자: ${description}`;
+        //             document.getElementById('letter-content-view').textContent = letterContent;
+        //             viewLetter.style.display = 'block';
+        //             editLetter.style.display = 'none';
+        //         }
+        //     });
+
+        //     deleteLetterBtn.addEventListener('click', async function () {
+        //         if (currentPhotoId) {
+        //             await deleteDoc(doc(db, 'photos', currentPhotoId));
+        //             currentPhotoDiv.remove();
+        //             letterModal.style.display = 'none';
+        //         }
+        //     });
+
+        //     closeBtn.addEventListener('click', function () {
+        //         letterModal.style.display = 'none';
+        //     });
+
+        //     window.addEventListener('click', function (event) {
+        //         if (event.target === letterModal) {
+        //             letterModal.style.display = 'none';
+        //         }
+        //     });
+
+        //     await loadPhotos();
+        // });
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
         import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
@@ -125,41 +286,31 @@
                 return await getDownloadURL(storageRef);
             }
 
-            async function addPhotoToServer(src, description) {
-                try {
-                    const docRef = await addDoc(collection(db, 'photos'), {
-                        src,
-                        description,
-                        letter: ''
-                    });
-                    addPhotoToGallery(docRef.id, src, description, '');
-                } catch (error) {
-                    console.error("Error adding photo:", error);
-                    alert("사진 추가 중 오류가 발생했습니다.");
-                }
+            async function addPhotoToFirestore(src, description, letter) {
+                await addDoc(collection(db, 'photos'), {
+                    src: src,
+                    description: description,
+                    letter: letter,
+                });
             }
-
-            addPresetPhotoBtn.addEventListener('click', function () {
-                const selectedPhotoSrc = presetPhotos.value;
-                const description = document.getElementById('letter-name').value;
-                addPhotoToServer(selectedPhotoSrc, description);
-            });
 
             addUploadedPhotoBtn.addEventListener('click', async function () {
                 const file = fileUpload.files[0];
                 if (file) {
-                    console.log("File selected:", file.name);
-                    try {
-                        const src = await uploadImageToStorage(file);
-                        const description = document.getElementById('letter-name').value;
-                        addPhotoToServer(src, description);
-                    } catch (error) {
-                        console.error("Error uploading image:", error);
-                        alert("이미지 업로드 중 오류가 발생했습니다.");
-                    }
-                } else {
-                    alert("파일을 선택하세요.");
+                    const src = await uploadImageToStorage(file);
+                    const description = prompt('작성자의 이름을 입력하세요:');
+                    const letter = prompt('편지 내용을 입력하세요:');
+                    await addPhotoToFirestore(src, description, letter);
+                    location.reload();
                 }
+            });
+
+            addPresetPhotoBtn.addEventListener('click', async function () {
+                const src = presetPhotos.value;
+                const description = prompt('작성자의 이름을 입력하세요:');
+                const letter = prompt('편지 내용을 입력하세요:');
+                await addPhotoToFirestore(src, description, letter);
+                location.reload();
             });
 
             editLetterBtn.addEventListener('click', function () {
@@ -167,33 +318,23 @@
                 editLetter.style.display = 'block';
                 document.getElementById('letter-name').value = currentPhotoDiv.getAttribute('data-description');
                 document.getElementById('letter-content').value = currentPhotoDiv.getAttribute('data-letter');
-                saveLetterBtn.textContent = '저장';
             });
 
             saveLetterBtn.addEventListener('click', async function () {
-                const description = document.getElementById('letter-name').value;
-                const letterContent = document.getElementById('letter-content').value;
-                if (currentPhotoId) {
-                    await updateDoc(doc(db, 'photos', currentPhotoId), {
-                        description,
-                        letter: letterContent
-                    });
-                    currentPhotoDiv.setAttribute('data-description', description);
-                    currentPhotoDiv.setAttribute('data-letter', letterContent);
-                    currentPhotoDiv.querySelector('.description').textContent = `작성자: ${description}`;
-                    document.getElementById('letter-name-view').textContent = `작성자: ${description}`;
-                    document.getElementById('letter-content-view').textContent = letterContent;
-                    viewLetter.style.display = 'block';
-                    editLetter.style.display = 'none';
-                }
+                const newName = document.getElementById('letter-name').value;
+                const newContent = document.getElementById('letter-content').value;
+                const docRef = doc(db, 'photos', currentPhotoId);
+                await updateDoc(docRef, {
+                    description: newName,
+                    letter: newContent,
+                });
+                location.reload();
             });
 
             deleteLetterBtn.addEventListener('click', async function () {
-                if (currentPhotoId) {
-                    await deleteDoc(doc(db, 'photos', currentPhotoId));
-                    currentPhotoDiv.remove();
-                    letterModal.style.display = 'none';
-                }
+                const docRef = doc(db, 'photos', currentPhotoId);
+                await deleteDoc(docRef);
+                location.reload();
             });
 
             closeBtn.addEventListener('click', function () {
@@ -201,13 +342,14 @@
             });
 
             window.addEventListener('click', function (event) {
-                if (event.target === letterModal) {
+                if (event.target == letterModal) {
                     letterModal.style.display = 'none';
                 }
             });
 
-            await loadPhotos();
+            loadPhotos();
         });
+
     </script>
 </body>
 
